@@ -49,7 +49,7 @@ withLoader <- function(ui_element,
                                                                       href = "css-loaders/css/imgcustom-fallback.css"))),
                    shiny::div(class = "shiny-loader-output-container",
                               shiny::div(class = "load-container",shiny::img(class = "loader-img", src = loader),
-                                          style = glue::glue("width: {img.width}; height: {img.height}; margin: auto; margin: auto {img.left.margin}; float: left;"))), proxy_element, ui_element))
+                                          style = glue::glue("width: {img.width}; height: {img.height}; margin: auto; margin: auto {img.left.margin}; float: left;")), proxy_element, ui_element))
   }
   else if (type=="html"){
     if(loader %in% c("dnaspin", "pacman", "loader1", "loader2", "loader3", "loader4", "loader5",
