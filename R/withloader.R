@@ -7,6 +7,9 @@
 #' For custom image option, the name must include the extension of the file.
 #' For custom text option, loader must be a list of marquee objects.
 #' @param proxy.height If the output doesn't specify the output height, you can set a proxy height. It defaults to 400px for outputs with undefined height.
+#' @param img.width Only used when `type = "image"`. Allows the user to set a custom width to the image. It defaults to 100px.
+#' @param img.height Only used when `type = "image"`. Allows the user to set a custom height to the image. It defaults to 400px.
+#' @param img.left.margin Only used when `type = "image"`. Allows the user to set a custom left margin to the image. It defaults to "auto".
 #' @references
 #' `shinycssloaders` https://github.com/andrewsali/shinycssloaders
 #'
@@ -23,7 +26,10 @@
 withLoader <- function(ui_element,
                         type="html",
                         loader="dnaspin",
-                        proxy.height = if (grepl("height:\\s*\\d", ui_element)) NULL else "400px")
+                        proxy.height = if (grepl("height:\\s*\\d", ui_element)) NULL else "400px",
+                        img.width="100px",
+                        img.height="100px",
+                        img.left.margin="auto")
 {
   stopifnot(type %in% c("html", "image", "text"))
 
@@ -42,7 +48,8 @@ withLoader <- function(ui_element,
                    shiny::singleton(shiny::tags$head(shiny::tags$link(rel = "stylesheet",
                                                                       href = "css-loaders/css/imgcustom-fallback.css"))),
                    shiny::div(class = "shiny-loader-output-container",
-                              shiny::div(class = "load-container",shiny::img(class = "loader-img", src = loader)), proxy_element, ui_element))
+                              shiny::div(class = "load-container",shiny::img(class = "loader-img", src = loader),
+                                          style = glue::glue("width: {img.width}; height: {img.height}; margin: auto; margin: auto {img.left.margin}; float: left;"))), proxy_element, ui_element))
   }
   else if (type=="html"){
     if(loader %in% c("dnaspin", "pacman", "loader1", "loader2", "loader3", "loader4", "loader5",
