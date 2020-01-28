@@ -30,7 +30,7 @@ withLoader <- function(ui_element,
                         proxy.height = if (grepl("height:\\s*\\d", ui_element)) NULL else "400px",
                         img.width="100px",
                         img.height="100px",
-                        img.left.margin="auto"
+                        img.left.margin="auto",
                         img.top.margin="auto")
 {
   stopifnot(type %in% c("html", "image", "text"))
